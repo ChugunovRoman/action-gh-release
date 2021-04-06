@@ -168,7 +168,7 @@ export const release = async (
     const target_commitish = existingRelease.data.target_commitish;
     const tag_name = tag;
     const name = config.input_name || tag;
-    const body = `${existingRelease.data.body}\n${releaseBody(config)}`;
+    const body = config.input_append_body ? `${existingRelease.data.body}\n${releaseBody(config)}` : existingRelease.data.body;
     const draft = config.input_draft;
     const prerelease = config.input_prerelease;
 

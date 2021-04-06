@@ -15,6 +15,7 @@ export interface Config {
   input_files?: string[];
   input_draft?: boolean;
   input_prerelease?: boolean;
+  input_append_body?: boolean;
   input_fail_on_unmatched_files?: boolean;
 }
 
@@ -52,6 +53,7 @@ export const parseConfig = (env: Env): Config => {
     input_files: parseInputFiles(env.INPUT_FILES || ""),
     input_draft: env.INPUT_DRAFT === "true",
     input_prerelease: env.INPUT_PRERELEASE == "true",
+    input_append_body: env.APPEND_BODY == "true",
     input_fail_on_unmatched_files: env.INPUT_FAIL_ON_UNMATCHED_FILES == "true"
   };
 };

@@ -21,6 +21,9 @@ inputs:
   prerelease:
     description: 'Identify the release as a prerelease. Defaults to false'
     required: false
+  append_body:
+    description: 'New text will be added to end of a existing release body . Defaults to true'
+    required: false
   files:
     description: 'Newline-delimited list of path globs for asset files to upload'
     required: false
