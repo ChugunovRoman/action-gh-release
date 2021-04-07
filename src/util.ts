@@ -55,7 +55,7 @@ export const parseConfig = (env: Env): Config => {
     input_draft: env.INPUT_DRAFT === "true",
     input_prerelease: env.INPUT_PRERELEASE == "true",
     input_append_body: env.INPUT_APPEND_BODY == "true",
-    input_delete_assets: env.INPUT_DELETE_ASSETS == "false",
+    input_delete_assets: env.INPUT_DELETE_ASSETS == "true",
     input_fail_on_unmatched_files: env.INPUT_FAIL_ON_UNMATCHED_FILES == "true"
   };
 };
