@@ -158,7 +158,7 @@ export const upload = async (
       "content-type": mime
     },
     name,
-    file
+    data: file
   });
 };
 
