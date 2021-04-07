@@ -29,12 +29,15 @@ describe("util", () => {
         "foo",
         releaseBody({
           github_ref: "",
+          custom_ref: "",
           github_repository: "",
           github_token: "",
           input_body: "foo",
           input_body_path: undefined,
           input_draft: false,
           input_prerelease: false,
+          input_append_body: false,
+          input_delete_assets: true,
           input_files: [],
           input_name: undefined,
           input_tag_name: undefined
@@ -46,12 +49,14 @@ describe("util", () => {
         "bar",
         releaseBody({
           github_ref: "",
+          custom_ref: "",
           github_repository: "",
           github_token: "",
           input_body: undefined,
           input_body_path: "__tests__/release.txt",
           input_draft: false,
-          input_prerelease: false,
+          input_append_body: false,
+          input_delete_assets: true,
           input_files: [],
           input_name: undefined,
           input_tag_name: undefined
@@ -63,12 +68,15 @@ describe("util", () => {
         "bar",
         releaseBody({
           github_ref: "",
+          custom_ref: "",
           github_repository: "",
           github_token: "",
           input_body: "foo",
           input_body_path: "__tests__/release.txt",
           input_draft: false,
           input_prerelease: false,
+          input_append_body: false,
+          input_delete_assets: true,
           input_files: [],
           input_name: undefined,
           input_tag_name: undefined
@@ -80,12 +88,15 @@ describe("util", () => {
     it("parses basic config", () => {
       assert.deepStrictEqual(parseConfig({}), {
         github_ref: "",
+        custom_ref: "",
         github_repository: "",
         github_token: "",
         input_body: undefined,
         input_body_path: undefined,
         input_draft: false,
         input_prerelease: false,
+        input_append_body: false,
+        input_delete_assets: false,
         input_files: [],
         input_name: undefined,
         input_tag_name: undefined,
