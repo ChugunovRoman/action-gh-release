@@ -22,7 +22,10 @@ inputs:
     description: 'Identify the release as a prerelease. Defaults to false'
     required: false
   append_body:
-    description: 'New text will be added to end of a existing release body . Defaults to true'
+    description: 'New text will be added to end of a existing release body. Defaults to true'
+    required: false
+  delete_assets:
+    description: 'Delete all assets for existing release body before update. Defaults to false'
     required: false
   files:
     description: 'Newline-delimited list of path globs for asset files to upload'

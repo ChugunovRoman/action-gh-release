@@ -27,6 +27,12 @@ export interface Releaser {
     tag: string;
   }): Promise<{ data: Release }>;
 
+  deleteReleaseAssetsByTag(params: {
+    owner: string;
+    repo: string;
+    tag: string;
+  }): Promise<void>;
+
   createRelease(params: {
     owner: string;
     repo: string;
@@ -67,6 +73,25 @@ export class GitHubReleaser implements Releaser {
     tag: string;
   }): Promise<{ data: Release }> {
     return this.github.repos.getReleaseByTag(params);
+  }
+
+  async deleteReleaseAssetsByTag(params: {
+    owner: string;
+    repo: string;
+    tag: string;
+  }): Promise<void> {
+    const release = await this.github.repos.getReleaseByTag(params);
+    const assets = await this.github.repos.listAssetsForRelease({ owner: params.owner, repo: params.repo, release_id: release.data.id })
+
+    const requests: unknown[] = [];
+
+    for (const asset of assets.data) {
+      requests.push(this.github.repos.deleteReleaseAsset({ repo: params.repo, owner: params.owner, asset_id: asset.id }))
+    }
+
+    await Promise.all(requests);
+
+    return;
   }
 
   createRelease(params: {
@@ -171,6 +196,12 @@ export const release = async (
     const body = config.input_append_body ? `${existingRelease.data.body}\n${releaseBody(config)}` : existingRelease.data.body;
     const draft = config.input_draft;
     const prerelease = config.input_prerelease;
+
+    if (config.input_delete_assets) {
+      console.info(`Removing assets for ${tag} release...`);
+      await releaser.deleteReleaseAssetsByTag({ owner, repo, tag })
+      console.info(`Removing assets for ${tag} release completed`);
+    }
 
     const release = await releaser.updateRelease({
       owner,
